@@ -2,6 +2,7 @@ package com.jforg.institutionproject.entiy;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -12,15 +13,16 @@ public class Institution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id",nullable = false)
-    @NotNull(message = "ID is required")
     private Long id;
 
-    @Column(name="code" , nullable = false, precision = 5)
+    @Column(name="code", nullable = false, precision = 5)
     @NotNull(message = "Code is required")
+    @Digits(integer = 5, fraction = 0, message = "Code must be a number with up to 5 digits")
     private BigDecimal code;
 
-    @Column(name="name" , nullable = false, precision = 50)
+    @Column(name="name", nullable = false, length = 50)
     @NotNull(message = "Name is required")
+    @Digits(integer = 50, fraction = 0, message = "Name must be a number with up to 50 digits")
     private BigDecimal name;
 
     @Column(name="status" , nullable = false)

@@ -3,6 +3,7 @@ package com.jforg.institutionproject.controller;
 
 import com.jforg.institutionproject.entiy.Institution;
 import com.jforg.institutionproject.service.InstitutionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +12,19 @@ import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@RequestMapping("/api/v1")
 public class InstitutionController {
 
     @Autowired
     InstitutionService institutionService;
 
-    @PostMapping("/create-institution")
-    public ResponseEntity<Institution> createInstitution(@RequestBody Institution institution){
+    @PostMapping("/institution/create")
+    public ResponseEntity<Institution> createInstitution(@Valid @RequestBody Institution institution){
         return new ResponseEntity<>(institutionService.saveInstitution(institution), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/institution/{id}")
     public ResponseEntity<Institution> getInstitution(@PathVariable Long id){
         return new ResponseEntity<>(institutionService.getInstitution(id), HttpStatus.OK);
     }
@@ -35,13 +37,13 @@ public class InstitutionController {
         return new ResponseEntity<>(institutions, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/institution/delete/{id}")
     public ResponseEntity<Institution> deleteInstitution(@PathVariable Long id){
         institutionService.deleteInstitution(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/active-institutions")
+    @GetMapping("/institutions/active")
     public ResponseEntity<List<Institution>> getActiveInstitutions(){
         List<Institution> institutions = institutionService.getActiveInstitutions();
         if (institutions.isEmpty()) {
