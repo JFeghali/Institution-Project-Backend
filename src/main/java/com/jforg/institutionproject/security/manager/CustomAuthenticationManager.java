@@ -1,6 +1,6 @@
 package com.jforg.institutionproject.security.manager;
 
-import com.jforg.institutionproject.entiy.User;
+import com.jforg.institutionproject.entity.User;
 import com.jforg.institutionproject.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

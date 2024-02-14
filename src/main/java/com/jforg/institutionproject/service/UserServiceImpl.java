@@ -2,7 +2,7 @@ package com.jforg.institutionproject.service;
 
 import java.util.Optional;
 
-import com.jforg.institutionproject.entiy.User;
+import com.jforg.institutionproject.entity.User;
 import com.jforg.institutionproject.exception.EntityNotFoundException;
 import com.jforg.institutionproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

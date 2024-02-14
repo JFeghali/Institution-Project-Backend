@@ -1,6 +1,6 @@
 package com.jforg.institutionproject.repository;
 
-import com.jforg.institutionproject.entiy.Institution;
+import com.jforg.institutionproject.entity.Institution;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

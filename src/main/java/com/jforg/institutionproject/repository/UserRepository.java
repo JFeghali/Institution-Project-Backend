@@ -1,7 +1,7 @@
 package com.jforg.institutionproject.repository;
 
 
-import com.jforg.institutionproject.entiy.User;
+import com.jforg.institutionproject.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

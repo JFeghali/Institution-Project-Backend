@@ -1,6 +1,6 @@
 package com.jforg.institutionproject.service;
 
-import com.jforg.institutionproject.entiy.User;
+import com.jforg.institutionproject.entity.User;
 
 import java.util.Optional;
 

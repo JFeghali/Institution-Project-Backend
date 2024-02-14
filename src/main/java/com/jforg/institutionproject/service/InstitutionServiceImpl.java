@@ -1,9 +1,8 @@
 package com.jforg.institutionproject.service;
 
-import com.jforg.institutionproject.entiy.Institution;
+import com.jforg.institutionproject.entity.Institution;
 import com.jforg.institutionproject.exception.EntityNotFoundException;
 import com.jforg.institutionproject.repository.InstitutionRepository;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

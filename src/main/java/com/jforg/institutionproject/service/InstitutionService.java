@@ -1,6 +1,6 @@
 package com.jforg.institutionproject.service;
 
-import com.jforg.institutionproject.entiy.Institution;
+import com.jforg.institutionproject.entity.Institution;
 
 import java.util.List;
 

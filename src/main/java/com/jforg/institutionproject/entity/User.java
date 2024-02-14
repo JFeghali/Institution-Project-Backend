@@ -1,4 +1,4 @@
-package com.jforg.institutionproject.entiy;
+package com.jforg.institutionproject.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

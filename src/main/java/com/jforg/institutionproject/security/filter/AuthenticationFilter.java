@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.jforg.institutionproject.entiy.User;
+import com.jforg.institutionproject.entity.User;
 import com.jforg.institutionproject.security.SecurityConstants;
 import com.jforg.institutionproject.security.manager.CustomAuthenticationManager;
 import jakarta.servlet.FilterChain;
