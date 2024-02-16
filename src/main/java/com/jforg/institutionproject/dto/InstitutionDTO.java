@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public class InstitutionDTO {
+
+    private Long id;
+
     @NotNull(message = "Code is required")
     @NotBlank(message = "Code must not be blank")
     @Pattern(regexp = "\\w{1,5}", message = "Code must be alphanumeric with up to 5 characters")
@@ -19,6 +22,14 @@ public class InstitutionDTO {
     private Boolean status;
 
     // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;

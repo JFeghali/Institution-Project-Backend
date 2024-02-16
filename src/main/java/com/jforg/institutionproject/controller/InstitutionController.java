@@ -78,6 +78,7 @@ public class InstitutionController {
     //  method to map InstitutionDTO to Institution entity
     private Institution mapDtoToEntity(InstitutionDTO institutionDTO) {
         Institution institution = new Institution();
+        institution.setId(institutionDTO.getId());
         institution.setCode(institutionDTO.getCode());
         institution.setName(institutionDTO.getName());
         institution.setStatus(institutionDTO.getStatus());
@@ -87,6 +88,7 @@ public class InstitutionController {
     //  method to map Institution entity to InstitutionDTO
     private InstitutionDTO mapEntityToDto(Institution institution) {
         InstitutionDTO institutionDTO = new InstitutionDTO();
+        institutionDTO.setId(institution.getId());
         institutionDTO.setCode(institution.getCode());
         institutionDTO.setName(institution.getName());
         institutionDTO.setStatus(institution.getStatus());
