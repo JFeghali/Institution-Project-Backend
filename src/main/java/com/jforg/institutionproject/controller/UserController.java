@@ -20,11 +20,13 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseMessage> createInstitution(@Valid @RequestBody User user){
+    public ResponseEntity<ResponseMessage<User>> createInstitution(@Valid @RequestBody User user) {
         Optional<User> userRecord = userService.getUserByUsername(user.getUsername());
-        if(userRecord.isPresent()){
-            return new ResponseEntity<>(new ResponseMessage<>("Username already exists",null), HttpStatus.BAD_REQUEST);
+        if (userRecord.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseMessage<>(HttpStatus.BAD_REQUEST, "Username already exists", null));
         }
-        return new ResponseEntity<>(new ResponseMessage<>("User has been successfully registered ",userService.saveUser(user)), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ResponseMessage<>(HttpStatus.CREATED, "User has been successfully registered", userService.saveUser(user)));
     }
 }

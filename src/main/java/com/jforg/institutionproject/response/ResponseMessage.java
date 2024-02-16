@@ -1,12 +1,26 @@
 package com.jforg.institutionproject.response;
 
+import org.springframework.http.HttpStatus;
+
 public class ResponseMessage<T> {
+    private HttpStatus status;
     private String message;
     private T data;
 
-    public ResponseMessage(String message, T data) {
+    public ResponseMessage(HttpStatus status, String message, T data) {
+        this.status = status;
         this.message = message;
         this.data = data;
+    }
+
+    // Getters and setters
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HttpStatus status) {
+        this.status = status;
     }
 
     public String getMessage() {

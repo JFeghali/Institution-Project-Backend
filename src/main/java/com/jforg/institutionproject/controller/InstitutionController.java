@@ -1,7 +1,7 @@
 package com.jforg.institutionproject.controller;
 
-
 import com.jforg.institutionproject.entity.Institution;
+import com.jforg.institutionproject.response.ResponseMessage;
 import com.jforg.institutionproject.service.InstitutionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping("/api/v1")
 public class InstitutionController {
 
@@ -19,35 +19,45 @@ public class InstitutionController {
     InstitutionService institutionService;
 
     @PostMapping("/institution/create")
-    public ResponseEntity<Institution> createInstitution(@Valid @RequestBody Institution institution){
-        return new ResponseEntity<>(institutionService.saveInstitution(institution), HttpStatus.CREATED);
+    public ResponseEntity<ResponseMessage<Institution>> createInstitution(@Valid @RequestBody Institution institution) {
+        Institution savedInstitution = institutionService.saveInstitution(institution);
+        ResponseMessage<Institution> responseMessage = new ResponseMessage<>(HttpStatus.CREATED, "Institution created successfully", savedInstitution);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
     }
 
     @GetMapping("/institution/{id}")
-    public ResponseEntity<Institution> getInstitution(@PathVariable Long id){
-        return new ResponseEntity<>(institutionService.getInstitution(id), HttpStatus.OK);
+    public ResponseEntity<ResponseMessage<Institution>> getInstitution(@PathVariable Long id) {
+        Institution institution = institutionService.getInstitution(id);
+        if (institution == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage<>(HttpStatus.NOT_FOUND, "Institution not found", null));
+        }
+        ResponseMessage<Institution> responseMessage = new ResponseMessage<>(HttpStatus.OK, "Institution retrieved successfully", institution);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
+
     @GetMapping("/institutions")
-    public ResponseEntity<List<Institution>> getInstitutions(){
+    public ResponseEntity<ResponseMessage<List<Institution>>> getInstitutions() {
         List<Institution> institutions = institutionService.getInstitutions();
         if (institutions.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ResponseMessage<>(HttpStatus.NO_CONTENT, "No institutions found", null));
         }
-        return new ResponseEntity<>(institutions, HttpStatus.OK);
+        ResponseMessage<List<Institution>> responseMessage = new ResponseMessage<>(HttpStatus.OK, "Institutions retrieved successfully", institutions);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 
     @DeleteMapping("/institution/delete/{id}")
-    public ResponseEntity<Institution> deleteInstitution(@PathVariable Long id){
+    public ResponseEntity<ResponseMessage<Void>> deleteInstitution(@PathVariable Long id) {
         institutionService.deleteInstitution(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage<>(HttpStatus.OK, "Institution deleted successfully", null));
     }
 
     @GetMapping("/institutions/active")
-    public ResponseEntity<List<Institution>> getActiveInstitutions(){
+    public ResponseEntity<ResponseMessage<List<Institution>>> getActiveInstitutions() {
         List<Institution> institutions = institutionService.getActiveInstitutions();
         if (institutions.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ResponseMessage<>(HttpStatus.NO_CONTENT, "No active institutions found", null));
         }
-        return new ResponseEntity<>(institutions, HttpStatus.OK);
+        ResponseMessage<List<Institution>> responseMessage = new ResponseMessage<>(HttpStatus.OK, "Active institutions retrieved successfully", institutions);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 }
